@@ -6,4 +6,6 @@ export async function main(ns : NS) {
     while (ns.hasRootAccess(hostname) == false){
         await ns.sleep(30000)
     }
+
+    
 }

@@ -1,0 +1,80 @@
+==== Faction Backdoor
+	CyberSec - CSEC | req hack 56
+	NiteSec - avmnite-02h | req hack 214
+	TheBlackHand - I.I.I.I | req hack 353
+	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
+
+==== AWAIT
+    hack | grow | weaken
+    sleep
+    prompt
+    wget
+    scp
+    write | writePort
+
+==== Game Tasks
+    setup
+        stage-1
+            hack all port0 server
+            queue up self-hack on rooted servers
+            build hacknet, just purchase nodes and upgrade
+
+        stage-2
+            hack all port1 servers
+            setup hack-manager-stage1 on "home" to target 'best' server based on [MATH]
+                give servers a value rating based on [growth * (max money / min security + 1)] //it's super arbitrary but it should do until v2
+
+        stage-3
+            purchase servers, start with 8gb / loop replacing when current purchased server RAM * 2 is < 1/8 of current money on 'home'
+            hack-manager-stage2
+                this one pawns off grow and weaken threads to purchased servers
+
+        stage-4
+            ?
+    
+==== Scripts Needed
+
+# hacknet upgrade
+    purchase as long as the cost of the hacknet upgrades if under 1/16 of avaliable money, 
+
+# hack-manager-stage2
+    # spider
+        gets a list of all avaliable server
+            filter for opened ports && root && required hack level
+                exec waitRoot on servers that have not been rooted
+    
+    while true
+
+        # server rank
+            based on list of server, assign hack value [growth * (max money / min security + 1)]
+            add top x to targets
+
+        for target in targets
+            weaken to min
+                execs weaken threads to get server to min security, if enough threads not avalible on the server queue them up in batches
+        
+            grow to max
+                execs grow threads to get server to max money
+
+            weaken to min
+                execs weaken threads to get server to min security
+
+            hack to 50%
+                execs hack threads to get 50% of the server's money
+
+# hack-manager-stage3
+
+# DAEMON 
+    - if not joined factions at appropriate hack levels => popup
+    - if not bought port openers at appropriate money || hack levels => toast
+
+
+==== ARCHIVE
+# self-hack
+    convert the starting script
+        expects the server to already be root
+# setup-stage1
+    copies self-hack to array of servers
+    runs build-hacknet
+# build hacknet
+    buys hacknet nodes and upgraded them as longs as the price is under 1/4 of the money on 'home'
