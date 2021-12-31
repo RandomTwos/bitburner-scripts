@@ -1,7 +1,7 @@
 {
   "include": [
     "NetscriptDefinitions.d.ts",
-    "dist/src/**/*",
+    "src/**/*",
   ],
 
   "compilerOptions": {
@@ -14,9 +14,9 @@
     "sourceMap": false,
     "strict": true,
 
-    "rootDir": "dist/src",
+    "rootDir": "src",
     "outDir": "dist/",
-    "baseUrl": "dist/src",
+    "baseUrl": "src",
     "paths": {
       "/*.js": [ "*" ],
       "*.js": [ "*" ]
