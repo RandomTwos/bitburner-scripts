@@ -1,0 +1,25 @@
+/** @param {NS} ns **/
+export async function main(ns) {
+	// Will puchase servers up to the limit with the requested RAM value
+	var ram = 16;
+	var i = 0;
+	
+	var targetHack = "phantasy";
+	var scriptHack = "/hack/setup-hack.js";
+
+	ns.tprint("per Server Cost Estimate: " + ns.getPurchasedServerCost(ram));
+
+	while (i < ns.getPurchasedServerLimit()) {
+		if (ns.getServerMoneyAvailable("home") > ns.getPurchasedServerCost(ram)) {
+			var hostname = ns.purchaseServer("pserv-" + i, ram);
+			await ns.scp("/hack/tools/hack-lib.js", hostname);
+			await ns.scp(scriptHack, hostname);
+			ns.exec(scriptHack, hostname, 6, targetHack);
+            i++;
+			ns.toast(hostname + " Purchased!");
+		}
+		await ns.sleep(10000);
+	}
+
+	ns.toast("Purchased Servers at Limit");
+}

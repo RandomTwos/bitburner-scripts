@@ -1,0 +1,117 @@
+setup / buyTools / 
+
+==== Current Task
+	Current Aug Target > BitRunners starting with Neurolink / (done [Sector-12, Avernum, Tian, Voldhaven, Ishima , New Tokyo, Chongqing])
+
+
+==== Faction Backdoors
+
+	CyberSec - CSEC | req hack 56
+	NiteSec - avmnite-02h | req hack 214
+	TheBlackHand - I.I.I.I | req hack 353
+	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
+
+
+==== port() list
+	port 1 - for listner / exec waitRoot for getting root on hostname
+	port 2 - for listner / exec builder against hostname
+	port 3 - for listner / sets up selfHack against hostname
+	port 4 - for listner / sets up managedHack against hostname
+	port 5 - to be implemented / takes RAM return from buildBotnet, determines when we're ready for new target and builds a new botnet targeting that one
+
+
+	port 20 - spider passes hostnames to this, supposed to build a list of servers 
+
+
+==== todo
+* botnet works to build servers
+	need to rework removal to get rid of servers only when needed
+	need to get ports working 
+	listner set up to do managedHack (listner not working)
+
+$ refactor all scripts to handle starting from 'new game'
+	stage1 > no existing hacking tools, no port openers
+				automate bitnodes
+	stage2 > CashRoot aug for one port opener and 1m
+				setup purchased servers
+	stage3 > 
+
+>	need to set up new postAug script that works....
+	figure out the number of threads needed to not hack a server into not having money....
+	start purchased servers on hacking 
+		ports Needed 0 - "harakiri-sushi"
+		ports Needed 1 - "iron-gym"
+		ports Needed 2 - "phantasy" 
+		ports Needed 3 - "rho-construction"
+
+-	coding contracts, run on .cct
+
++	figure out the number and levels for hacknet to make it worth it?
+
+__________SCRATCH__________
+
+---- SPIDER
+# spider [startFrom]
+	scan startFrom
+		for every name in the scan	
+			scan that name
+				if there isn't a file already with that name
+					get the server details and write it to a file with that hostname in /targets/port0/ (a folder for every level of port that needs to be unblocked)
+
+ * not working right, need to figure out the ports evidently
+
+---- LISTNER
+# home listner
+	listens for hostname on port(1)
+		if root on server and hostname != home or serv-[0-24] 
+			write hostname to port(2)
+		if not root
+			exec waitRoot
+	listens for hostname on port(2)
+		if host has RAM && Money > 0
+			exec builder
+				// this takes the server to the max money and lowest security
+	listens for hostname on port(3)
+		scp selfHack to hostname
+		exec for max threads
+	listens for hostname on port(4)
+		scp managedHack to hostname
+		exec managedHack on hostname
+
+---- HACKING
+# builder [targetServer]
+	runs as many threads as possible of weaken, grow, weaken at targetServer
+	writes hostname to port(3) when done
+
+# finding servers example 
+	/** @param {NS} ns */
+	export function getServers(ns) {
+    	const servers = ['home'];
+    	for (const server of servers)
+        	ns.scan(server)
+            	.filter((x) => !servers.includes(x))
+            	.forEach((x) => servers.push(x));
+    	return servers;
+	}
+
+	/** @param {NS} ns */
+	export function getRootedServers(ns) {
+    	for (const server of getServers(ns).filter((x) => !ns.hasRootAccess(x) && !ns.getPurchasedServers().includes(x) && x != 'home')) {
+        	for (const tool of [ns.brutessh, ns.ftpcrack, ns.relaysmtp, ns.httpworm, ns.sqlinject, ns.nuke]) {
+            	try {
+                	tool(server);
+            	}
+            	catch (e) { }
+       		}
+    	}
+    	return getServers(ns).filter((x) => ns.hasRootAccess(x));
+	}
+
+
+#	hackManager
+
+	while don't have formulas
+		do basic maxThread if loop wgh
+	
+	figure out the needed threads for getting a server to lowestSec and maxMoney and the number of hacks to not nuke it
+		exec those as individual scripts to maxamize thread count

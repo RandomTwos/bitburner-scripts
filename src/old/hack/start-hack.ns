@@ -1,0 +1,21 @@
+/** @param {NS} ns **/
+export async function main(ns) {
+    var targetHack = ns.args[0];
+    var moneyThresh = ns.getServerMaxMoney(targetHack) * 0.75;
+    var securityThresh = ns.getServerMinSecurityLevel(targetHack) + 5;
+
+    if (ns.fileExists("BruteSSH.exe", "home")) {
+  		ns.brutessh(targetHack);
+    }
+    ns.nuke(targetHack);
+
+    while(true) {
+        if (ns.getServerSecurityLevel(targetHack) > securityThresh) {
+            await ns.weaken(targetHack);
+        } else if (ns.getServerMoneyAvailable(targetHack) < moneyThresh) {
+            await ns.grow(targetHack);
+        } else {
+            await ns.hack(targetHack);
+        }
+    }
+}

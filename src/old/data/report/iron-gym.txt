@@ -1,0 +1,1 @@
+hostname:iron-gym,maxRam:32,numOpenPortsRequired:1,requiredHackingSkill:100,minDifficulty:10,moneyAvaliable:20000000,moneyMax:500000000,serverGrowth:20
