@@ -1,8 +1,8 @@
 /** @param {NS} ns **/
-import { NS } from '../../NetscriptDefinitions'
+//import { NS } from '../../NetscriptDefinitions'
 export async function main(ns) {
     ns.disableLog('ALL')
-    console.log("RUNNING DEAMON ENGINE")
+    ns.print("RUNNING DEAMON ENGINE")
 
     const portOpeners = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
 
@@ -10,18 +10,17 @@ export async function main(ns) {
         
         // - if not joined factions at appropriate hack levels => popup
         for (let f of ns.getPlayer().factions){
-            console.log("FACTIONS JOINED: " + f)
+            ns.print("FACTIONS JOINED: " + f)
         }
         
         // - if not bought port openers at appropriate money || hack levels => toast
         for (let open in portOpeners){ 
             if (ns.fileExists(open, "home") == false) {
-                console.log("REMINDER - BUY " + open)
-                ns.tprint("REMINDER - BUY " + open)
+                ns.print("REMINDER - BUY " + open)
             }
         }
 
         // sleep to make loop work
-        await ns.sleep(0)
+        await ns.sleep(600000)
     }
 }

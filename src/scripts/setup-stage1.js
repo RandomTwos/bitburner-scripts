@@ -1,7 +1,7 @@
 /** @param {NS} ns **/
-import { NS } from '../../NetscriptDefinitions'
+//import { NS } from '../../NetscriptDefinitions'
 export async function main(ns) {
-    ns.disableLog('sleep')
+    ns.disableLog('ALL')
 
     let servers = ns.scan("home")
     let targets = []
@@ -30,7 +30,8 @@ export async function main(ns) {
         // copies self-hack and runs it as much as it can be on the target server, for debugging logs the self-hack target and it's returned PID
         await ns.scp("/bin/self-hack.js", "home", target)
         let threads = Math.floor((ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam("/bin/self-hack/js", "home"))
-        console.log("\n self-hack: " + target + " | PID: " + ns.exec("/bin/self-hack.js", target, threads, target))
+        let PID = ns.exec("/bin/self-hack.js", target, threads, target)
+        console.log("\n self-hack: " + target + " | PID: " + PID)
     }
 
     // hook for build-hacknet

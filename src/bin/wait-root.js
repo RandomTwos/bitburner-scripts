@@ -1,5 +1,5 @@
 /** @param {NS} ns **/
-import { NS } from '../../NetscriptDefinitions'
+//import { NS } from '../../NetscriptDefinitions'
 export async function main(ns) {
     ns.disableLog('sleep')
     let targetHack = ns.getServer(ns.args[0])
@@ -11,7 +11,7 @@ export async function main(ns) {
         if (ns.fileExists("HTTPWorm.exe", "home") && targetHack.httpPortOpen == false)  {ns.httpworm(targetHack.hostname)}
         if (ns.fileExists("SQLInject.exe", "home") && targetHack.sqlPortOpen == false)  {ns.sqlinject(targetHack.hostname)}
         
-        ns.print(targetHack.openPortCount + " / " + targetHack.numOpenPortsRequired)
+        ns.print(targetHack.hostname + ": " + targetHack.openPortCount + " / " + targetHack.numOpenPortsRequired)
         await ns.sleep(60000)
     }
     ns.nuke(targetHack.hostname)
