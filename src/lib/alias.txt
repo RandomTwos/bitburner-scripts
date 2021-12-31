@@ -1,0 +1,12 @@
+==== List of alias
+
+setup="run /scripts/setup-stage1.js"
+
+buyTools="buy BruteSSH.exe; buy FTPCrack.exe; buy relaySMTP.exe; buy HTTPWorm.exe; buy SQLInject.exe; buy DeepscanV1.exe; buy DeepscanV2.exe; buy AutoLink.exe"
+
+root="run /bin/waitRoot.js" // 1 ARG - hostname
+
+scan="scan-analyze" // 1 ARG - depth of scan
+
+
+** this list is not current with the save
