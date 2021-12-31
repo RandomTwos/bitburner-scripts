@@ -1,4 +1,5 @@
-export async function main(ns) {
+import { NS } from '../../NetscriptDefinitions'
+export async function main(ns : NS) {
     const args = ns.flags([["help", false]])
     const server = ns.args[0]
     if (args.help || !server) {
