@@ -1,5 +1,6 @@
+/** @param {NS} ns **/
 import { NS } from '../../NetscriptDefinitions'
-export async function main(ns : NS) {
+export async function main(ns) {
     ns.disableLog('sleep')
     let targetHack = ns.getServer(ns.args[0])
 
