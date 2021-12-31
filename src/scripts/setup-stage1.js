@@ -34,4 +34,7 @@ export async function main(ns : NS) {
 
     // hook for build-hacknet
     ns.run("/scripts/build-hacknet.js")
+
+    // hook for starting DAEMON
+    ns.run("/scripts/DAEMON.js")
 }
