@@ -14,7 +14,7 @@ export async function main(ns) {
         }
         
         // - if not bought port openers at appropriate money || hack levels => toast
-        for (let open in portOpeners){ 
+        for (let open of portOpeners){ 
             if (ns.fileExists(open, "home") == false) {
                 ns.print("REMINDER - BUY " + open)
             }
