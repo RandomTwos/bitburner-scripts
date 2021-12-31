@@ -2,7 +2,7 @@ export async function main(ns) {
     const args = ns.flags([["help", false]])
     const server = ns.args[0]
     if (args.help || !server) {
-        NS.tprint("This script does a more detailed analysis of a server.")
+        ns.tprint("This script does a more detailed analysis of a server.")
         ns.tprint(`Usage: run ${ns.getScriptName()} SERVER`)
         ns.tprint("Example:")
         ns.tprint(`> run ${ns.getScriptName()} n00dles`)
