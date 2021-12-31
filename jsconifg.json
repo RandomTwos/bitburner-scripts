@@ -5,7 +5,15 @@
       ],
     "compilerOptions": {
       "module": "commonjs",
-      "target": "es6"
+      "target": "es6",
+      
+      "rootDir": "src",
+      "outDir": "dist/",
+      "baseUrl": "src",
+      "paths": {
+        "/*.js": [ "*" ],
+        "*.js": [ "*" ]
+      }
     },
     "exclude": ["node_modules"]
 
