@@ -4,12 +4,6 @@ setup / buyTools /
 	Current Aug Target > BitRunners starting with Neurolink / (done [Sector-12, Avernum, Tian, Voldhaven, Ishima , New Tokyo, Chongqing])
 
 
-==== Faction Backdoors
-
-	CyberSec - CSEC | req hack 56
-	NiteSec - avmnite-02h | req hack 214
-	TheBlackHand - I.I.I.I | req hack 353
-	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
 
 
 ==== port() list

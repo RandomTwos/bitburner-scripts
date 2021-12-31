@@ -1,7 +1,7 @@
 {
   "include": [
     "NetscriptDefinitions.d.ts",
-    "src/**/*", "old/_examples/EX_analyze_server.js",
+    "src/**/*",
   ],
 
   "compilerOptions": {
