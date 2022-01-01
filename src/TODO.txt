@@ -70,6 +70,24 @@
     - if not joined factions at appropriate hack levels => popup
     - if not bought port openers at appropriate money || hack levels => toast
 
+# map
+    need to build a recursive search map that displays like scan-analyze but with just names 
+        green has root and hackable
+        yellow has root and under level
+        orange not root but could
+        red not root and not able to
+        
+        include bold if on the list of 'important' servers
+        include italics if it's a company with stocks
+        include @ if there are contracts on the server
+
+
+# coding contracts
+    idk, it's a thing
+
+# stock markets
+    idk, it's a thing
+
 
 ==== ARCHIVE
 # self-hack
