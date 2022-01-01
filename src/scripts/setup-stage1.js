@@ -28,7 +28,7 @@ export async function main(ns) {
 
         // copies self-hack and runs it as much as it can be on the target server, for debugging logs the self-hack target and it's returned PID
         await ns.scp("/bin/self-hack.js", "home", target)
-        let threads = (ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam("/bin/self-hack.js", "home")
+        let threads = Math.floor(ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam("/bin/self-hack.js", "home")
         let PID = ns.exec("/bin/self-hack.js", target, threads, target)
         ns.print("\n self-hack: " + target +" | t" + threads + " | PID: " + PID)
     }
