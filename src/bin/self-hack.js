@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
-//import { NS } from '../../NetscriptDefinitions'
-export async function main(ns) {
+import { NS } from '../../NetscriptDefinitions'
+export async function main(ns:NS) {
     ns.disableLog('sleep')
 
     const args = ns.flags([['help', false]])
@@ -12,6 +12,11 @@ export async function main(ns) {
         ns.tprint("Example:")
         ns.tprint(`> run ${ns.getScriptName()} n00dles`)
         return
+    }
+
+    while (ns.getHackingLevel() < ns.getServerRequiredHackingLevel()){ 
+        await ns.sleep(60e3)
+        ns.print("hack level:" + ns.getHackingLevel() + " / " + ns.getServerRequiredHackingLevel())
     }
 
     while (true) {
