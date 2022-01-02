@@ -6,7 +6,6 @@ export async function main(ns) {
     ns.print("RUNNING DEAMON ENGINE")
 
     const portOpeners = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
-    const p1 = ns.getPortHandle(1)
 
     while (true) {
         // initialize Stage 1
@@ -17,7 +16,7 @@ export async function main(ns) {
 
         // check port(1) for servers that do not have self-hack on them, are valid targets
         if (ns.peek(1) !== "“NULL PORT DATA”") {
-            let host = p1.pop()
+            let host = ns.readPort(1)
             if (getRoot(host)) { 
                 await ns.scp("/bin/self-hack.js", "home", host)
                 ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
@@ -33,7 +32,7 @@ export async function main(ns) {
             case hacklevel: if not member of group spit out log reminder
 
             100 CyberSec, 250, 400, 600, 2500 | for factions
-            50 portOpeners[1],  | for port openeners
+            50 portOpeners[1], 100 portOpeners[2] | for port openeners
         */
 
 
