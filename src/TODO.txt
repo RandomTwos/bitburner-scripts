@@ -4,7 +4,14 @@
 	TheBlackHand - I.I.I.I | req hack 353
 	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
 
-    | CashRoot / Tian Di | ignore lack of Focus / 
+    | CashRoot (ignore lack of Focus) / Tian Di | 
+
+==== BN order
+    BN4 - Singularity | allows scripting most everything
+    BN1 - repeat to 3/3
+    BN4 - repeat to 3/3
+    BN9 - Hacktocracy | changes bitnodes to server, new mechanic that's much better?
+
 
 ==== AWAIT
     hack | grow | weaken
@@ -19,7 +26,7 @@
         stage-1
             hack all port0 server
             queue up self-hack on rooted servers
-            build hacknet, just purchase nodes and upgrade
+            build hacknet, just purchase nodes
 
         stage-2
             hack all port1 servers
