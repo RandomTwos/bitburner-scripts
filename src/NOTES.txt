@@ -1,0 +1,25 @@
+==== Faction Backdoor
+	CyberSec - CSEC | req hack 56
+	NiteSec - avmnite-02h | req hack 214
+	TheBlackHand - I.I.I.I | req hack 353
+	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
+
+==== Augments Needed
+    CashRoot (ignore lack of Focus) / Tian Di
+
+
+==== BN order
+    BN4 - Singularity | allows scripting most everything
+    BN1 - repeat to 3/3
+    BN4 - repeat to 3/3
+    BN9 - Hacktocracy | changes bitnodes to server, new mechanic that's much better?
+
+
+==== AWAIT
+    hack | grow | weaken
+    sleep
+    prompt
+    wget
+    scp
+    write | writePort
+
