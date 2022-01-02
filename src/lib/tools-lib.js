@@ -15,7 +15,7 @@ export function spider(ns){
     }
 
     for (let i of servers) {
-        if (i == "home" || i == "darkweb" || ns.getPurchasedServers().includes(i)) { servers.pop(i) }
+        if (i == "home" || i == "darkweb" || ns.getPurchasedServers().includes(i) == true) { servers.pop(i) }
     }
 
     return servers
@@ -25,21 +25,25 @@ export function getRoot(ns, target) {
     // gets root on a target
     // returns true if sucessfull, false if there aren't enough ports opened
     
-    if (ns.fileExists("BruteSSH.exe", "home"))    {ns.brutessh(target)}
-    if (ns.fileExists("FTPCrack.exe", "home"))    {ns.ftpcrack(target)}
-    if (ns.fileExists("relaySMTP.exe", "home"))   {ns.relaysmtp(target)}
-    if (ns.fileExists("HTTPWorm.exe", "home"))    {ns.httpworm(target)}
-    if (ns.fileExists("SQLInject.exe", "home"))   {ns.sqlinject(target)}
-
-    let host = ns.getServer(target)
-    if (host.numOpenPortsRequired > host.openPortCount) {
-        ns.nuke(target)
-        return true
-    } else {return false}
+    if (ns.hasRootAccess(target)) {return true}
+    else {
+        if (ns.fileExists("BruteSSH.exe", "home"))    {ns.brutessh(target)}
+        if (ns.fileExists("FTPCrack.exe", "home"))    {ns.ftpcrack(target)}
+        if (ns.fileExists("relaySMTP.exe", "home"))   {ns.relaysmtp(target)}
+        if (ns.fileExists("HTTPWorm.exe", "home"))    {ns.httpworm(target)}
+        if (ns.fileExists("SQLInject.exe", "home"))   {ns.sqlinject(target)}
+    
+        let host = ns.getServer(target)
+        if (host.openPortCount >= host.numOpenPortsRequired) {
+                ns.nuke(target)
+                return true
+        } else {return false}
+    }
 }
 
 export function checkCanSelfHack(ns, target){
-    if (target == "home" || target == "darkweb" || ns.getPurchasedServers().includes(target) || ns.getServerMaxRam(target) == 0 || ns.getServerMoneyAvailable(target) == 0) { return false}
+    if (target == "home" || target == "darkweb" || ns.getPurchasedServers().includes(target) == true || ns.getServerMaxRam(target) == 0 || ns.getServerMoneyAvailable(target) == 0) { return false}
+    return true
 }
 
 /* export function chooseHackTarget(ns, list){
