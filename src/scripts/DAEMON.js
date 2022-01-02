@@ -21,6 +21,6 @@ export async function main(ns) {
         }
 
         // sleep to make loop work
-        await ns.sleep(600000)
+        await ns.sleep(600e3)
     }
 }
