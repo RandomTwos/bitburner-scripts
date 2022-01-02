@@ -4,7 +4,7 @@
 export function threadCount(ns, script, target){
     // takes a script and calculates the avaliable RAM and number of threads that can be run
 
-    return Math.floor(ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam(script, "home")
+    return Math.floor((ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam(script, "home"))
 }
 
 export function spider(ns){
@@ -36,6 +36,10 @@ export function getRoot(ns, target) {
         ns.nuke(target)
         return true
     } else {return false}
+}
+
+export function checkCanSelfHack(ns, target){
+    if (target == "home" || target == "darkweb" || ns.getPurchasedServers().includes(target) || ns.getServerMaxRam(target) == 0 || ns.getServerMoneyAvailable(target) == 0) { return false}
 }
 
 /* export function chooseHackTarget(ns, list){
