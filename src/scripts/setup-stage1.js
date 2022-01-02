@@ -20,7 +20,6 @@ export async function main(ns) {
         // run waitRoot to get root on the server (waitRoot loops until all port openers have been aquired)
         if (ns.hasRootAccess(target) == false) {
             ns.run("/bin/wait-root.js", 1, target)
-            await ns.sleep(20000)
 
             // for debugging, logs who we've run wiatRoot on
             ns.print("\n waitRoot:" + target)
@@ -34,8 +33,8 @@ export async function main(ns) {
     }
 
     // hook for build-hacknet
-    ns.run("/scripts/build-hacknet.js")
+//    ns.run("/scripts/build-hacknet.js")
 
     // hook for starting DAEMON
-    ns.run("/scripts/DAEMON.js")
+//    ns.run("/scripts/DAEMON.js")
 }
