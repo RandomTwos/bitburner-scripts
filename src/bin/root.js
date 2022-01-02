@@ -10,6 +10,6 @@ export async function main(ns) {
     if (ns.fileExists("HTTPWorm.exe", "home"))    {ns.httpworm(target); p++}
     if (ns.fileExists("SQLInject.exe", "home"))   {ns.sqlinject(target); p++}
     
-    if (ns.getServerNumPortsRequired(target) > p) {ns.nuke(target)}
+    if (ns.getServerNumPortsRequired(target) >= p) {ns.nuke(target)}
     else {ns.tprint("NOT ENOUGH PORTS OPENED")}
 }
