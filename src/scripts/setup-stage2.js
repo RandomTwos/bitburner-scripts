@@ -1,34 +1,36 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { spider, getRoot, checkCanSelfHack } from "/lib/tools-lib.js"
+import { spider, getRoot, checkCanSelfHack, threadCount } from "/lib/tools-lib.js"
 
 export async function main(ns) {
     ns.disableLog('ALL')
 
     // scan through all servers again, attempt root and add servers not able to be rooted to array
     let hosts = spider(ns)
-    let notRoot = []
-    for (let host in hosts) {
 
-        // if we're not root or the self-hack isn't running
-        if (!ns.hasRootAccess(host) || !ns.scriptRunning("/bin/self-hack.js", host)) {
+    for (let host of hosts) {
+
+ /*     ns.tprint("    HOST: " + host)
+        ns.tprint("    ROOT: " + ns.hasRootAccess(host))
+        ns.tprint(" RUNNING: " + ns.scriptRunning("/bin/self-hack.js", host))
+        ns.tprint("     CAN: " + checkCanSelfHack(ns, host) + "\n------")
+*/
+        // can self-hack and is not running already
+        if (checkCanSelfHack(ns, host) && !ns.scriptRunning("/bin/self-hack.js", host)) {
             
+            // verify root
             let hasRoot = getRoot(ns, host)
             await ns.sleep(10e3)
 
             if (hasRoot) {
-                if (checkCanSelfHack(host)) {
-                    await ns.scp("/bin/self-hack.js", "home", host)
-                    ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
-                    ns.print("SELF-HACK: " + host)
-                }
+                   await ns.scp("/bin/self-hack.js", "home", host)
+                   ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
+                   ns.print("SELF-HACK: " + host)
             } else {
-                notRoot.push(host)
+                ns.writePort(1, host)
                 ns.print("ROOT FAILED: "+ host)
-            }
+           }
         }
+        await ns.sleep(0)
     }
-
-    ns.print("\n\ntesting / ALL ROOT FAILURES: " + notRoot)
- 
 }
