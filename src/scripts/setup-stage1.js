@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import * as toolsLib from '/lib/tools-lib.js'
+import { threadCount } from "../lib/tools-lib"
 
 export async function main(ns) {
     ns.disableLog('ALL')
@@ -33,7 +33,7 @@ export async function main(ns) {
         if (ns.hasRootAccess(target)) {
             // copies self-hack and runs it as much as it can be on the target server, for debugging logs the self-hack target and it's returned PID
             await ns.scp("/bin/self-hack.js", "home", target)
-            let PID = ns.exec("/bin/self-hack.js", target, toolsLib.threadCount(ns, "/bin/self-hack.js", target), target)
+            let PID = ns.exec("/bin/self-hack.js", target, threadCount(ns, "/bin/self-hack.js", target), target)
             ns.print("\n self-hack: " + target +" | t" + threads + " | PID: " + PID)
         }
     }
