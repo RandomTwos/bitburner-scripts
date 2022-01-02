@@ -29,10 +29,9 @@
     purchase as long as the cost of the hacknet upgrades if under 1/16 of avaliable money
 
 # hack-manager-v1
-    # spider
-        gets a list of all avaliable server
+
             filter for opened ports && root && required hack level
-                exec waitRoot on servers that have not been rooted
+                exec getRoot on servers that have not been rooted
     
     while true
 
@@ -88,3 +87,5 @@
     runs build-hacknet
 # build hacknet
     buys hacknet nodes and upgraded them as longs as the price is under 1/4 of the money on 'home'
+# spider
+    gets a list of all avaliable server
