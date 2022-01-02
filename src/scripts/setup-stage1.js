@@ -1,5 +1,7 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
+import * as toolsLib from '/lib/tools-lib.js'
+
 export async function main(ns) {
     ns.disableLog('ALL')
 
@@ -19,22 +21,26 @@ export async function main(ns) {
     for (let target of targets){
         // run waitRoot to get root on the server (waitRoot loops until all port openers have been aquired)
         if (ns.hasRootAccess(target) == false) {
-            ns.run("/bin/wait-root.js", 1, target)
+            if (ns.getServerNumPortsRequired(target) > 0) { 
+                ns.run("/bin/wait-root.js", 1, target)
+                ns.print("\n waitRoot:" + target)
+            }
+            else if (ns.getServerNumPortsRequired(target) == 0){ ns.run("bin/root.js", 1, target)}
 
-            // for debugging, logs who we've run wiatRoot on
-            ns.print("\n waitRoot:" + target)
+            await ns.sleep(10e3)
         }
 
-        // copies self-hack and runs it as much as it can be on the target server, for debugging logs the self-hack target and it's returned PID
-        await ns.scp("/bin/self-hack.js", "home", target)
-        let threads = Math.floor(ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam("/bin/self-hack.js", "home")
-        let PID = ns.exec("/bin/self-hack.js", target, threads, target)
-        ns.print("\n self-hack: " + target +" | t" + threads + " | PID: " + PID)
+        if (ns.hasRootAccess(target)) {
+            // copies self-hack and runs it as much as it can be on the target server, for debugging logs the self-hack target and it's returned PID
+            await ns.scp("/bin/self-hack.js", "home", target)
+            let PID = ns.exec("/bin/self-hack.js", target, toolsLib.threadCount(ns, "/bin/self-hack.js", target), target)
+            ns.print("\n self-hack: " + target +" | t" + threads + " | PID: " + PID)
+        }
     }
 
     // hook for build-hacknet
-//    ns.run("/scripts/build-hacknet.js")
+    ns.run("/scripts/build-hacknet.js", 1, 8)
 
     // hook for starting DAEMON
-//    ns.run("/scripts/DAEMON.js")
+    ns.run("/scripts/DAEMON.js")
 }
