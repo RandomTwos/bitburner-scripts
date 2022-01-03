@@ -24,7 +24,6 @@ export async function main(ns) {
             else {await ns.tryWritePort(1, host)}
             ns.print("FAILED ROOT: " + host)
         }
-
         await ns.sleep(30e3)
     }
 }
