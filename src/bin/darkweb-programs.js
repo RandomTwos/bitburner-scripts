@@ -1,7 +1,7 @@
 /** @param {NS} ns **/
 //import { NS } from '../NetscriptDefinitions'
 import { programs } from '/lib/const.js'
-import { purchaseDarkwebPrograms } from '/lib/BN4-lib.js'
+import { purchaseDarkwebPrograms } from '/lib/lib-BN4.js'
 
 export async function main(ns) {
     ns.purchaseTor()

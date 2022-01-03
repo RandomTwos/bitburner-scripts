@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { buildRoute } from '/lib/tools-lib.js'
+import { buildRoute } from '/lib/lib-BN1.js'
 import { crimes, programs } from '/lib/const.js'
 
 export async function commitCrime(ns) {

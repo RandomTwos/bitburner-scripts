@@ -15,7 +15,7 @@ export async function main(ns) {
         ns.print("DAEMON CYCLE: " + ++c)
 
         // initialize Stage 1
-        if (!ns.scriptRunning("/bin/self-hack.js", "n00dles") && ns.getServerMoneyAvailable("home") < 1e6 ) {
+        if (!ns.scriptRunning("/bin/hack-self.js", "n00dles") && ns.getServerMoneyAvailable("home") < 1e6 ) {
             ns.run("/scripts/setup-stage1.js")
             ns.print("INITIALIZED: STAGE 1")
         }
@@ -25,7 +25,7 @@ export async function main(ns) {
         }
 
         // initialize Stage 2
-        if (!ns.scriptRunning("/bin/self-hack.js", "iron-gym") && ns.getServerMoneyAvailable("home") < 1e9 ) {
+        if (!ns.scriptRunning("/bin/hack-self.js", "iron-gym") || ns.getServerMoneyAvailable("home") < 1e9 ) {
             ns.run("/scripts/setup-stage2.js") 
             ns.print("INITIALIZED: STAGE 2")
         }
@@ -36,7 +36,7 @@ export async function main(ns) {
 
         // commit crimes if below a certian ammount of money
         if (ns.getServerMoneyAvailable("home") < 5e6 && ns.isBusy() == false) { 
-            ns.run("/bin/commit-crime.js")
+            ns.run("/bin/crime-commit.js")
             ns.print("INITIALIZED: COMMITING CRIME")
         }
         

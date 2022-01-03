@@ -6,7 +6,7 @@ export async function main(ns) {
     
     while (true) {
         if (ns.isBusy() == false) { 
-            ns.run("/bin/commit-crime.js")
+            ns.run("/bin/crime-commit.js")
             ns.print("INITIALIZED: COMMITING CRIME")
         }
     }
