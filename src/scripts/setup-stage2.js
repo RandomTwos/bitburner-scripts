@@ -20,14 +20,14 @@ export async function main(ns) {
             
             // verify root
             let hasRoot = getRoot(ns, host)
-            await ns.sleep(10e3)
+            await ns.sleep(0)
 
             if (hasRoot) {
                    await ns.scp("/bin/self-hack.js", "home", host)
                    ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
                    ns.print("SELF-HACK: " + host)
             } else {
-                ns.writePort(1, host)
+                await ns.writePort(1, host)
                 ns.print("ROOT FAILED: "+ host)
            }
         }

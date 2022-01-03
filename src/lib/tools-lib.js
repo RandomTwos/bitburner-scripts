@@ -46,6 +46,14 @@ export function checkCanSelfHack(ns, target){
     return true
 }
 
+export function buildRoute(ns, target){
+    // builds a list from "home" to the target server
+    ns.print(target)
+
+    return route
+}
+
+
 /* export function chooseHackTarget(ns, list){
     // 
 }

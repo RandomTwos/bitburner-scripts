@@ -1,5 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
+
 export async function main(ns) {
     ns.tprint("TODO - got to find a good solution for purchasing upgradse with the cheapest cost first")
     const n = ns.args[0]

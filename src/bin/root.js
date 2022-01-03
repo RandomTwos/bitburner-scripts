@@ -1,5 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
+
 export async function main(ns) {
     const target = ns.args[0]
     let p = 0

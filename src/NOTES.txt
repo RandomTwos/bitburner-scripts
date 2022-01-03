@@ -3,9 +3,18 @@
 	NiteSec - avmnite-02h | req hack 214
 	TheBlackHand - I.I.I.I | req hack 353
 	BitRunners - run4theh111z (is more than 10 deep from home, the-hub then nova-med) | req hack 545
+    Daedalus - req hack 2500
+
 
 ==== Augments Needed
-    CashRoot (ignore lack of Focus) / Tian Di
+    Tian Di Hui: CashRoot (ignore lack of Focus) 
+
+    Sector-12
+    Chongqing
+    New Tokyo
+    Ishima
+    Aevum
+    Volhaven
 
 
 ==== BN order
@@ -23,3 +32,5 @@
     scp
     write | writePort
 
+==== PORTS
+    port(1) - self hack targets that have not been rooted
