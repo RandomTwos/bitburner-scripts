@@ -1,56 +1,90 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { getRoot, threadCount } from '/lib/tools-lib.js'
+import { purchaseDarkwebPrograms } from '/lib/BN4-lib.js'
+import { programs } from '/lib/const.js'
+
 export async function main(ns) {
     ns.disableLog('ALL')
-    ns.print("RUNNING DEAMON ENGINE")
+    ns.print("RUNNING DAEMON ENGINE")
 
-    const portOpeners = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
+    let c = 0
+//    const portOpeners = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
 
     while (true) {
+        ns.print("DAEMON CYCLE: " + ++c)
+
         // initialize Stage 1
-        if (!ns.scriptRunning("/bin/self-hack.js", "n00dles") && ns.getServerMoneyAvailable("home") < 1e6 ) {ns.run("/script/setup-stage1.js")}
+        if (!ns.scriptRunning("/bin/self-hack.js", "n00dles") && ns.getServerMoneyAvailable("home") < 1e6 ) {
+            ns.run("/scripts/setup-stage1.js")
+            ns.print("INITIALIZED: STAGE 1")
+        }
 
         // initialize Stage 2
-        if (!ns.scriptRunning("/bin/self-hack.js", "iron-gym") && ns.getServerMoneyAvailable("home") < 1e9 ) {ns.run("/script/setup-stage2.js")}
-
-        // check port(1) for servers that do not have self-hack on them, are valid targets
-        if (ns.peek(1) !== "“NULL PORT DATA”") {
-            let host = ns.readPort(1)
-            if (getRoot(host)) { 
-                await ns.scp("/bin/self-hack.js", "home", host)
-                ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
-                ns.print("SELF-HACK: " + host)
-             }
-            else {ns.tryWritePort(1, host)}
-            ns.print("FAILED ROOT: " + host)
+        if (!ns.scriptRunning("/bin/self-hack.js", "iron-gym") && ns.getServerMoneyAvailable("home") < 1e9 ) {
+            ns.run("/scripts/setup-stage2.js") 
+            ns.print("INITIALIZED: STAGE 2")
+        }
+        if (!ns.scriptRunning("/scripts/daemon-port1.js", "home")) { 
+            ns.run("/scripts/daemon-port1.js")
+            ns.print("INITIALIZED: PORT 1 DAEMON")
         }
 
+        // commit crimes if below a certian ammount of money
+        if (ns.getServerMoneyAvailable("home") < 5e6 && !ns.isBusy()) { 
+            ns.run("/bin/commit-crime.js")
+            ns.print("INITIALIZED: COMMITING CRIME")
+        }
 
-        // reminders at specified hack levels
-        /*  switch( player hack level) {
-            case hacklevel: if not member of group spit out log reminder
-
-            100 CyberSec, 250, 400, 600, 2500 | for factions
-            50 portOpeners[1], 100 portOpeners[2] | for port openeners
-        */
-
-
+        //do the darkweb
+        if (ns.purchaseTor()) {ns.print("INITIALIZED: TOR NODE")}
+        if (ns.getServerMoneyAvailable("home") > 5e6) {
+            await purchaseDarkwebPrograms(ns)
+        }
         
-        // - if not bought port openers at appropriate money || hack levels => toast
-        /*  switch( player hack level) {
-            case hacklevel: if not member of group spit out log reminder
-        */
+        // reminders at specified hack levels
+        let player = ns.getPlayer()
 
-            /* case, based on hack level || money avaliable
-        for (let open of portOpeners){ 
-            if (ns.fileExists(open, "home") == false) {
-                ns.print("REMINDER - BUY " + open)
+        if (player.hacking > 3000) {
+            // if not a memeber of Daedalus
+            if (player.factions.includes("Daedalus") == false) {
+                ns.print("REMINDER: JOIN DAEDALUS")
             }
+            if (ns.fileExists(programs[4], "home") == false){
+                ns.print("REMINDER: BUY SQLINJECT")
+            }
+        } else if (player.hacking > 600) {
+            if (player.factions.includes("BitRunners") == false) {
+                ns.print("REMINDER: JOIN BITRUNNERS")
+            }
+            if (ns.fileExists(programs[3], "home") == false){
+                ns.print("REMINDER: BUY HTTPWORM")
+            }             
+        } else if (player.hacking > 400) {
+            if (player.factions.includes("The Black Hand") == false) {
+                ns.print("REMINDER: JOIN THE BLACK HAND")
+            }
+            if (ns.fileExists(programs[2], "home") == false){
+                ns.print("REMINDER: BUY RELAYSMTP")
+            } 
+        } else if (player.hacking > 250) {
+            if (player.factions.includes("NiteSec") == false) {
+                ns.print("REMINDER: JOIN NITESEC")
+            }
+            if (ns.fileExists(programs[1], "home") == false){
+                ns.print("REMINDER: BUY FTPCRACK")
+            } 
+        } else if (player.hacking > 100) {
+            if (player.factions.includes("CyberSec" == false)) {
+                ns.print("REMINDER: JOIN CYBERSEC")
+            }
+            if (ns.fileExists(programs[0], "home") == false){
+                ns.print("REMINDER: BUY BRUTESSH")
+            } 
         }
-        */
 
         // sleep to make loop work
-        await ns.sleep(0)
+        await ns.sleep(60e3)
+        ns.print("----------")
+        ns.tail()
     }
 }
