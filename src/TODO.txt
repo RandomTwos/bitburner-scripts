@@ -27,7 +27,21 @@
 
 # path to host
     
+# working for factions/companies 
+    using arg, get job
+    work job, accept new position when avaliable
+    change focus back every 5 min until ignore focus req aug purchased
 
+
+# purchasing/installing Augmentations
+    get current factions, when cash is > 1/2 avaliable purchase all non-NF Augments
+
+
+# creating programs 
+    (if money < 200e3 for 1+ hr) && notBusy
+
+
+# 
 
 
 # hacknet upgrade

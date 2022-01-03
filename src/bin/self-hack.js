@@ -2,7 +2,7 @@
 //import { NS } from '../../NetscriptDefinitions'
 
 export async function main(ns) {
-    ns.disableLog('sleep')
+    ns.disableLog('ALL')
 
     const args = ns.flags([['help', false]])
     const hostname = args._[0]

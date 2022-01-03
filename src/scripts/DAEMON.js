@@ -1,10 +1,11 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { purchaseDarkwebPrograms } from '/lib/BN4-lib.js'
 import { programs } from '/lib/const.js'
 
 export async function main(ns) {
     ns.disableLog('ALL')
+
+    ns.tail()
     ns.print("RUNNING DAEMON ENGINE")
 
     let c = 0
@@ -19,6 +20,10 @@ export async function main(ns) {
             ns.print("INITIALIZED: STAGE 1")
         }
 
+        if (ns.getServerMoneyAvailable("home") > 200e3 && ns.scan("home").includes("darkweb") == false)  {
+            ns.run("/bin/darkweb-programs.js")
+        }
+
         // initialize Stage 2
         if (!ns.scriptRunning("/bin/self-hack.js", "iron-gym") && ns.getServerMoneyAvailable("home") < 1e9 ) {
             ns.run("/scripts/setup-stage2.js") 
@@ -30,15 +35,9 @@ export async function main(ns) {
         }
 
         // commit crimes if below a certian ammount of money
-        if (ns.getServerMoneyAvailable("home") < 5e6 && !ns.isBusy()) { 
+        if (ns.getServerMoneyAvailable("home") < 5e6 && ns.isBusy() == false) { 
             ns.run("/bin/commit-crime.js")
             ns.print("INITIALIZED: COMMITING CRIME")
-        }
-
-        //do the darkweb
-        if (ns.purchaseTor()) {ns.print("INITIALIZED: TOR NODE")}
-        if (ns.getServerMoneyAvailable("home") > 5e6) {
-            await purchaseDarkwebPrograms(ns)
         }
         
         // reminders at specified hack levels
@@ -82,9 +81,12 @@ export async function main(ns) {
             } 
         }
 
+        // check for if faction invite from not a city faction is waiting
+
+
+
         // sleep to make loop work
         await ns.sleep(60e3)
         ns.print("----------")
-        ns.tail()
     }
 }

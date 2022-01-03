@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { getRoot, threadCount } from '/lib/tools-lib.js'
+import { getRoot, threadCount, checkCanSelfHack } from '/lib/tools-lib.js'
 
 export async function main(ns) {
     ns.disableLog('ALL')
@@ -12,9 +12,14 @@ export async function main(ns) {
         if (ns.peek(1) !== "NULL PORT DATA") {
             let host = ns.readPort(1)
             if (getRoot(ns, host)) {
-                await ns.scp("/bin/self-hack.js", "home", host)
-                ns.exec("/bin/self-hack.js", host, threadCount(ns, "/bin/self-hack.js", host), host)
-                ns.print("SELF-HACK: " + host)
+                if (checkCanSelfHack(ns, host)) {
+                    await ns.scp("/bin/self-hack.js", "home", host)
+                    let threads = threadCount(ns, "/bin/self-hack.js", host)
+                    if (threads > 0) {
+                        ns.exec("/bin/self-hack.js", host, threads, host)
+                        ns.print("SELF-HACK: " + host)
+                    }
+                }
             }
             else {await ns.tryWritePort(1, host)}
             ns.print("FAILED ROOT: " + host)
