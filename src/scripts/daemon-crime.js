@@ -9,8 +9,6 @@ export async function main(ns) {
             ns.run("/bin/crime-commit.js")
             ns.print("INITIALIZED: COMMITING CRIME")
         }
+        await ns.sleep(60e3)
     }
-
-    await ns.sleep(60e3)
 }
-            

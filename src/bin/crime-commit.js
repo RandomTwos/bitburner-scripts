@@ -12,6 +12,6 @@ export async function main(ns) {
             ns.commitCrime(crime)
             break
         }
-        // await ns.sleep(1e3)
+        await ns.sleep(1e3)
     }
 }

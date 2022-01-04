@@ -25,7 +25,7 @@ export async function main(ns) {
         }
 
         // initialize Stage 2
-        if (!ns.scriptRunning("/bin/hack-self.js", "iron-gym") || ns.getServerMoneyAvailable("home") < 1e9 ) {
+        if (!ns.scriptRunning("/bin/hack-self.js", "iron-gym")) {
             ns.run("/scripts/setup-stage2.js") 
             ns.print("INITIALIZED: STAGE 2")
         }
