@@ -34,7 +34,7 @@ export function getRoot(ns, target) {
         if (ns.fileExists("SQLInject.exe", "home"))   {ns.sqlinject(target)}
     
         let host = ns.getServer(target)
-        if (host.openPortCount >= host.numOpenPortsRequired) {
+        if (ns.getServerNumPortsRequired(target) <= host.openPortCount) {
                 ns.nuke(target)
                 return true
         } else {return false}
