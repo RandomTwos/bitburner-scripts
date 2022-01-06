@@ -6,5 +6,5 @@ export async function main(ns) {
         ns.commitCrime("Shoplifting") 
         await ns.sleep(2e3)
     }
-    ns.tprint("DONE BUILDING CRIME CHANCE")
+    ns.tprint("NOW ABLE TO ROB STORES")
 }
