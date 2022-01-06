@@ -4,7 +4,6 @@ import { programs } from '/lib/const.js'
 import { purchaseDarkwebPrograms } from '/lib/lib-BN4.js'
 
 export async function main(ns) {
-    ns.purchaseTor()
     let allPurchased = false
 
     // eslint-disable-next-line no-unmodified-loop-condition
