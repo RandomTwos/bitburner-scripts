@@ -18,6 +18,8 @@ export async function commitCrime(ns) {
 }
 
 export async function purchaseDarkwebPrograms(ns) {
+    if (ns.getPlayer().tor == false) { ns.purchaseTor() }
+
     for (let program of programs) {
         ns.purchaseProgram(program)
     }
@@ -28,4 +30,9 @@ export function manualBackdoor(ns, target){
     
     for (let server of route) { ns.connect(server) }
     return ns.installBackdoor(target)
+}
+
+export function acceptStoryFactions(ns) {
+    
+    return true
 }

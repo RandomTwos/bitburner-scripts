@@ -53,7 +53,6 @@ export function buildRoute(ns, target){
     return route
 }
 
-
 /* export function chooseHackTarget(ns, list){
     // 
 }
