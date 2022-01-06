@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { crimes } from "/lib/const.js"
+import { crimes, crimeStats } from "/lib/const.js"
 
 // requires BN4.1 or higher
 export async function main(ns) {
