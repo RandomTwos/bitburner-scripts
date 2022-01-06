@@ -4,6 +4,7 @@ import { getRoot, threadCount, checkCanSelfHack } from '/lib/lib-BN1.js'
 
 export async function main(ns) {
     ns.disableLog('ALL')
+    ns.tail()
     ns.print("\n ----------- \nDAEMON: PORT(1) RUNNING")
 
     while (true) {

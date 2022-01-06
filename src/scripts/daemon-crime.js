@@ -3,6 +3,7 @@
 
 export async function main(ns) {
     ns.disableLog('ALL')
+    ns.tail()
     
     while (true) {
         if (ns.isBusy() == false) { 
