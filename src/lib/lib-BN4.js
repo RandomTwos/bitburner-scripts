@@ -10,7 +10,7 @@ export async function commitCrime(ns) {
     for (let crime of crimes) {
         if (ns.getCrimeChance(crime) > sucess) {
             ns.commitCrime(crime)
-            await ns.write("/data/log-crime.txt", JSON.stringify(ns.getCrimeStats(crime)), "a")
+            // await ns.write("/data/log-crime.txt", JSON.stringify(ns.getCrimeStats(crime)), "a")
             break
         }
         await ns.sleep(0)
@@ -33,6 +33,6 @@ export function manualBackdoor(ns, target){
 }
 
 export function acceptStoryFactions(ns) {
-    
+    // TODO
     return true
 }

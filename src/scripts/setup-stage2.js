@@ -4,6 +4,7 @@ import { spider, getRoot, checkCanSelfHack, threadCount } from "/lib/lib-BN1.js"
 
 export async function main(ns) {
     ns.disableLog('ALL')
+    ns.clearPort(1)
 
     // scan through all servers again, attempt root and add servers not able to be rooted to array
     let hosts = spider(ns)

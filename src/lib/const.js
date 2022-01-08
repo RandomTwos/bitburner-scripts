@@ -21,51 +21,78 @@ const crimes = ["Heist",
 
 // above are old and need to be worked out
 
-const factions = [{ 'name': "CyberSec",
-                    'hackReq': 56,
-                    'server': "CSEC" },
-                  { 'name': "NiteSec",
-                    'hackReq': 214,
-                    'server': "avmnite-02h" },
-                  { 'name': "The Black Hand",
-                    'hackReq': 353,
-                    'server': "I.I.I.I" },
-                  { 'name': "BitRunners",
-                    'hackReq': 545,
-                    'server': "run4theh111z" },
-                  { 'name': "Daedalus",
-                    'hackReq': 2500,
-                    'server': "the-cave" },]
+const factionInfo = [{ name: "CyberSec",
+                    hackReq: 56,
+                    server: "CSEC" },
+                  { name: "NiteSec",
+                    hackReq: 214,
+                    server: "avmnite-02h" },
+                  { name: "The Black Hand",
+                    hackReq: 353,
+                    server: "I.I.I.I" },
+                  { name: "BitRunners",
+                    hackReq: 545,
+                    server: "run4theh111z" },
+                  { name: "Daedalus",
+                    hackReq: 2500,
+                    server: "the-cave" },]
 
 let factionDetails = function() { name: ""
                                   type:  ""
                                   hackReq: 0
                                   server: "" }
 
-const hackEXE = [{fileName: "BruteSSH.exe",
-                  command: 'ns.brutessh',
-                  price: 0,
-                  createTime: 0},
-                 {fileName: "FTPCrack.exe",
-                  command: 'ns.ftpcrack',
-                  price: 2e3,
-                  createTime: 1},
-                 {fileName: "relaySMTP.exe",
-                  command: 'ns.relaysmtp',
-                  price: 2e3,
-                  createTime: 1},
-                 {fileName: "HTTPWorm.exe",
-                  command: 'ns.httpworm',
-                  price: 2e3,
-                  createTime: 1},
-                 {fileName: "SQLInject.exe",
-                  command: 'ns.sqlinject',
-                  price: 2e3,
-                  createTime: 1} ]
+const hackEXE = [{ fileName: "BruteSSH.exe",
+                       command: 'ns.brutessh',
+                       unlock: 50,
+                       price: 500e3,
+                       createTime: 600e3},
+                     { fileName: "FTPCrack.exe",
+                       command: 'ns.ftpcrack',
+                       unlock: 100,
+                       price: 1500e3,
+                       createTime: 1800e3},
+                     { fileName: "relaySMTP.exe",
+                       command: 'ns.relaysmtp',
+                       unlock: 250,
+                       price: 5e6,
+                       createTime: 7200e3},
+                     { fileName: "HTTPWorm.exe",
+                       command: 'ns.httpworm',
+                       unlock: 500,
+                       price: 30e6,
+                       createTime: 14400e3},
+                     { fileName: "SQLInject.exe",
+                       command: 'ns.sqlinject',
+                       unlock: 750,
+                       price: 250e6,
+                       createTime: 28800e3} ]
+
+const hackTools = [{ fileName: "DeepscanV1..exe",
+                     unlock: 75,
+                     price: 500e3,
+                     createTime: 900e3},
+                   { fileName: "DeepscanV2.exe",
+                     unlock: 400,
+                     price: 25e6,
+                     createTime: 7200e3},
+                   { fileName: "ServerProfiler.exe",
+                     unlock: 75,
+                     price: 500e3,
+                     createTime: 1800e3},
+                   { fileName: "AutoLink.exe",
+                     unlock: 25,
+                     price: 1e6,
+                     createTime: 900e3},
+                   { fileName: "Formulas.exe",
+                     unlock: 1000,
+                     price: 5e9,
+                     createTime: 14400e3}]
 
 let programDetails = function() { fileName: ""
                                   command: ''
                                   price: 0
+                                  unlock: 0
                                   createTime: 0 }
 
 
@@ -122,5 +149,5 @@ let crimeDetails = function() { name: ""
                                 intXP: 0 }
                 
 
-export { programs, crimes, factions, hackEXE, crimeStats, programDetails, factionDetails, crimeDetails}
+export { programs, crimes, factionInfo, hackEXE, hackTools, crimeStats, programDetails, factionDetails, crimeDetails}
 

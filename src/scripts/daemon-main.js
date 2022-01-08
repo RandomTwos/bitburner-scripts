@@ -1,6 +1,7 @@
 /** @param {NS} ns **/
 //import { NS } from '../../NetscriptDefinitions'
-import { programs } from '/lib/const.js'
+import { bestHackTarget } from '/lib/lib-BN1.js'
+import { programs, factionInfo, hackEXE } from '/lib/const.js'
 
 export async function main(ns) {
     ns.disableLog('ALL')
@@ -9,10 +10,15 @@ export async function main(ns) {
     ns.print("RUNNING DAEMON ENGINE")
 
     let c = 0
-//    const portOpeners = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
 
     while (true) {
         ns.print("DAEMON CYCLE: " + ++c)
+
+        // check to see the best hack target
+        ns.clearPort(2)
+        let bestTarget = bestHackTarget(ns)
+        await ns.writePort(2, bestTarget)
+        ns.print("BEST TARGET: " + bestTarget)
 
         // initialize Stage 1
         if (!ns.scriptRunning("/bin/hack-self.js", "n00dles") && ns.getServerMoneyAvailable("home") < 1e6 ) {
@@ -40,53 +46,31 @@ export async function main(ns) {
             ns.print("INITIALIZED: COMMITING CRIME")
         }
         
-        // reminders at specified hack levels
+        // reminders at specified hack levels, 5 iterations currently
         let player = ns.getPlayer()
 
-        if (player.hacking > 3000) {
-            // if not a memeber of Daedalus
-            if (player.factions.includes("Daedalus") == false) {
-                ns.print("REMINDER: JOIN DAEDALUS")
+        let i = 0
+        while (i < factionInfo.length) {
+            await ns.sleep(0)
+            ns.print("SUB-CYCLE: " + i)
+
+            if (player.hacking > factionInfo[i].hackReq && player.factions.includes(factionInfo[i].name) == false) {
+                ns.print("REMINDER: JOIN " + factionInfo[i].name)
             }
-            if (ns.fileExists(programs[4], "home") == false){
-                ns.print("REMINDER: BUY SQLINJECT")
+
+            if (player.hacking > hackEXE[i].unlock && ns.fileExists(hackEXE[i].fileName) == false) {
+                ns.print("REMINDER: BUY " + hackEXE[i].fileName)
             }
-        } else if (player.hacking > 600) {
-            if (player.factions.includes("BitRunners") == false) {
-                ns.print("REMINDER: JOIN BITRUNNERS")
-            }
-            if (ns.fileExists(programs[3], "home") == false){
-                ns.print("REMINDER: BUY HTTPWORM")
-            }             
-        } else if (player.hacking > 400) {
-            if (player.factions.includes("The Black Hand") == false) {
-                ns.print("REMINDER: JOIN THE BLACK HAND")
-            }
-            if (ns.fileExists(programs[2], "home") == false){
-                ns.print("REMINDER: BUY RELAYSMTP")
-            } 
-        } else if (player.hacking > 250) {
-            if (player.factions.includes("NiteSec") == false) {
-                ns.print("REMINDER: JOIN NITESEC")
-            }
-            if (ns.fileExists(programs[1], "home") == false){
-                ns.print("REMINDER: BUY FTPCRACK")
-            } 
-        } else if (player.hacking > 100) {
-            if (player.factions.includes("CyberSec" == false)) {
-                ns.print("REMINDER: JOIN CYBERSEC")
-            }
-            if (ns.fileExists(programs[0], "home") == false){
-                ns.print("REMINDER: BUY BRUTESSH")
-            } 
+
+            i++
         }
+
 
         // check for if faction invite from not a city faction is waiting
 
 
-
         // sleep to make loop work
         await ns.sleep(60e3)
-        ns.print("----------")
+        ns.clearLog()
     }
 }
