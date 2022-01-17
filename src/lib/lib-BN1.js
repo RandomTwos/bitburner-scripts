@@ -8,10 +8,8 @@ export function threadCount(ns, script, target){
     return Math.floor((ns.getServerMaxRam(target) - ns.getServerUsedRam(target)) / ns.getScriptRam(script, "home"))
 }
 
-export function threadsWeaken(ns, host){
-    let host = ns.args[0]
-
-    return (ns.getServerSecurityLevel(host) - ns.getServerMinSecurityLevel(host)) / .05
+export function threadsWeaken(ns, server){
+    return (ns.getServerSecurityLevel(server) - ns.getServerMinSecurityLevel(server)) / .05
 }
 
 export function usedRAM(ns, script, threads) {

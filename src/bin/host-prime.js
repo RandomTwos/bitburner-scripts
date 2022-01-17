@@ -12,24 +12,6 @@ export async function main(ns:NS) {
     let hostRAM = ns.getServerMaxRam(host)
     let maxRAMusage = neededRAM - hostRAM
 
-    await ns.scp(script, "home", host)
-    if (maxRAMusage < 0) ns.exec(script, host, threads, host)
-    else {
-        while (maxRAMusage > 0 )
-
-    }
-    
-
-    while (neededRAM > 0) {
-        
-        ns.exec (script, host, )
-
-
-
-
-
-
-
 }
 
 /*
